@@ -1,0 +1,13 @@
+@for (article of articles; track $index) {
+    @if(article.isPublished) {
+        <a [ngClass]="{'popular-article': article.likes > 100}" [routerLink]="['/article',article.id]">
+            <h1>{{article.title}}</h1>
+            <p>{{article.content}}</p>
+            <p [ngStyle]="{color: article.likes >= 150 ? 'green' : 'black'}">Like: {{article.likes}}</p>
+        </a>
+    }
+}
+<!-- Check publishedArticle into app.component.ts -->
+@if(!publishedArticle.length) {
+    <p>Aucun article disponible</p>
+}
