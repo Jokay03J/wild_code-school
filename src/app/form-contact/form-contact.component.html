@@ -1,0 +1,51 @@
+<form #form="ngForm" (ngSubmit)="form.valid && handleSubmit()">
+    <fieldset>
+        <label for="firstname">First name</label>
+        <input type="text" name="firstname" minlength="2" maxlength="15" required id="firstname" [(ngModel)]="newMessage.firstname" #firstname="ngModel">
+        @if(firstname.errors && form.submitted) {
+            <p class="form-error">
+                @if(firstname.errors["required"]) {
+                    Le prénom est requis !
+                }
+                @if(firstname.errors["minlength"]) {
+                    Le prénom doit comporter au moins 2 caractères
+                }
+                @if(firstname.errors["maxlength"]) {
+                    Le prénom ne doit pas dépasser 15 caractères 
+                }
+            </p>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="lastname">Last name</label>
+        <input type="text" name="lastname" minlength="2" maxlength="15" required id="lastname" [(ngModel)]="newMessage.lastname" #lastname="ngModel">
+        @if(lastname.errors && form.submitted) {
+            <p class="form-error">
+                @if(lastname.errors["required"]) {
+                    Le nom est requis !
+                }
+                @if(lastname.errors["minlength"]) {
+                    Le nom doit comporter au moins 2 caractères
+                }
+                @if(lastname.errors["maxlength"]) {
+                    Le nom ne doit pas dépasser 15 caractères
+                }
+            </p>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="email">Email</label>
+        <input type="email" name="email" email required id="lastname" [(ngModel)]="newMessage.email" #email="ngModel">
+        @if(email.errors && form.submitted) {
+            <p class="form-error">
+                @if(email.errors["required"]) {
+                    L'email est requise !
+                }
+                @if(email.errors["email"]) {
+                    L'email est invalide
+                }
+            </p>
+        }
+    </fieldset>
+    <input type="submit" value="Envoyer">
+</form>

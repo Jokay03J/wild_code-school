@@ -1,0 +1,19 @@
+form {
+    width: fit-content;
+    padding: 1rem;
+
+    fieldset {
+        display: flex;
+        flex-direction: column;
+        border: none;
+        margin: 1rem 0rem;
+    }
+
+    input {
+        width: 100%;
+    }
+}
+
+.form-error {
+    color: red;
+}
