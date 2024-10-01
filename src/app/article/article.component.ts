@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import {FormsModule} from "@angular/forms"
 
 interface Article {
@@ -18,21 +18,15 @@ interface Article {
   styleUrl: './article.component.scss'
 })
 export class ArticleComponent {
-  article: Article = {
-    title: 'Titre de l\'article',
-    author: 'John Doe',
-    content: 'Voici le contenu de l\'article.',
-    image: 'https://via.placeholder.com/350x150',
-    isPublished: true,
-    comment: ''
-  };
-
+  // Version moderne(utilise les signaux)
+  // article = input.required<Article>();
+  @Input({required: true}) article!: Article;
+  
   togglePublication(): void {
     this.article.isPublished = !this.article.isPublished;
   }
 
   test() {
     console.log(this.article.comment);
-    
   }
 }

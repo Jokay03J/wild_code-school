@@ -1,19 +1,17 @@
-@if(article.isPublished) {
-    <div>
-        <img [src]="article.image" [alt]="article.image + ' image'">
-        <h1>{{article.title}}</h1>
-        <p>{{article.author}}</p>
-        <p>{{article.content}}</p>
-        <p>{{article.comment}}</p>
-        <form>
-            <input type="text" [(ngModel)]="article.comment" [ngModelOptions]="{standalone: true}" placeholder="Mon commentaire">
-        </form>
-    </div>
-}
-<button (click)="togglePublication()">
-    @if(article.isPublished) {
-        dépublier
-    } @else {
-        publier
-    }
-</button>
+<div>
+    <img [src]="article.image" [alt]="article.image + ' image'">
+    <h1>{{article.title}}</h1>
+    <p>{{article.author}}</p>
+    <p>{{article.content}}</p>
+    <p>{{article.comment}}</p>
+    <form>
+        <input type="text" [(ngModel)]="article.comment" [ngModelOptions]="{standalone: true}" placeholder="Mon commentaire">
+    </form>
+    <button (click)="togglePublication()">
+        @if(article.isPublished) {
+            dépublier
+        } @else {
+            publier
+        }
+    </button>
+</div>

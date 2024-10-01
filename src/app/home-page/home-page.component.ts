@@ -1,13 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { FormContactComponent } from "../form-contact/form-contact.component";
-import { SignupFormComponent } from "../signup-form/signup-form.component";
+import { ArticleComponent } from '../article/article.component';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormContactComponent, SignupFormComponent],
+  imports: [ArticleComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
