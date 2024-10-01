@@ -1,7 +1,7 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, EventEmitter, Input, input, Output } from '@angular/core';
 import {FormsModule} from "@angular/forms"
 
-interface Article {
+export interface Article {
   title: string;
   author: string;
   content: string;
@@ -21,12 +21,17 @@ export class ArticleComponent {
   // Version moderne(utilise les signaux)
   // article = input.required<Article>();
   @Input({required: true}) article!: Article;
-  
+  @Output() onLike: EventEmitter<Article> = new EventEmitter<Article>(); 
+
   togglePublication(): void {
     this.article.isPublished = !this.article.isPublished;
   }
 
   test() {
     console.log(this.article.comment);
+  }
+
+  handleLike() {
+    this.onLike.emit(this.article);
   }
 }

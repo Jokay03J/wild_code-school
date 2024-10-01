@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { ArticleComponent } from '../article/article.component';
+import { Article, ArticleComponent } from '../article/article.component';
+
+interface New {
+  hasNews: boolean;
+  article?: Article;
+}
 
 @Component({
   selector: 'app-home-page',
@@ -9,6 +14,7 @@ import { ArticleComponent } from '../article/article.component';
   styleUrl: './home-page.component.scss'
 })
 export class HomePageComponent {
+  notification: New = {hasNews: false}
   articles = [
     { 
       id: 'b431cefb-46df-426d-99d6-90cc46f816a3',
@@ -42,4 +48,8 @@ export class HomePageComponent {
     }
   ];
   publishedArticle = this.articles.filter((article) => article.isPublished)
+
+  handleLike(article: Article) {
+    this.notification = { hasNews: true, article };
+  }
 }

@@ -1,6 +1,10 @@
+@if(notification.hasNews) {
+    <div>Vous venez de liker {{notification.article?.title}}</div>
+}
+
 @for (article of articles; track $index) {
     @if(article.isPublished) {
-        <app-article [article]="article" />
+        <app-article [article]="article" (onLike)="handleLike(article)" />
     }
 }
 <!-- Check publishedArticle into app.component.ts -->
