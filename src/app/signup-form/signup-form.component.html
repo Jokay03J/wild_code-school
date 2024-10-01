@@ -1,0 +1,60 @@
+<form [formGroup]="signUpForm" (ngSubmit)="signUpForm.valid && handleSubmit()">
+    <fieldset>
+        <label for="username">Surnom</label>
+        <input type="text" id="username" formControlName="username">
+        @if (signUpForm.get('username')?.invalid && signUpForm.get('username')?.dirty) {
+            <p class="form-error">
+                @if (signUpForm.get('username')?.hasError('required')) {
+                    Le surnom est requis.
+                }
+                @if (signUpForm.get('username')?.hasError('minlength')) {
+                  Le surnom doit faire au moins 3 caractères.
+                }
+            </p>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="email">Email</label>
+        <input type="email" name="email" required id="email" formControlName="email">
+        @if (signUpForm.get('email')?.invalid && signUpForm.get('email')?.dirty) {
+            <p class="form-error">
+                @if (signUpForm.get('email')?.hasError('required')) {
+                    L'email est requis.
+                }
+                @if (signUpForm.get('email')?.hasError('email')) {
+                   L'email est invalide.
+                }
+            </p>
+        }
+    </fieldset>
+
+    <fieldset formGroupName="passwords">
+        <label for="password">Mot de passe</label>
+        <input type="password" name="password" id="password" formControlName="password">
+        @if (signUpForm.get('passwords.password')?.invalid && signUpForm.get('passwords.password')?.dirty) {
+            <p class="form-error">
+                @if (signUpForm.get('passwords.password')?.hasError('required')) {
+                    Le mot de passe est requis.
+                }
+                @if (signUpForm.get('passwords.password')?.hasError('securePassword')) {
+                    Le mot de passe doit contenir au moins 12 caractères, avec une majuscule, une minuscule, un chiffre, et un caractère spécial.
+                }
+            </p>
+        }
+        <label for="confirmPassword">Confirmation du mot de passe</label>
+        <input type="password" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword">
+        <p class="form-error">
+            @if (signUpForm.get('passwords')?.invalid && signUpForm.get('passwords')?.dirty) {
+                <p class="form-error">
+                    @if (signUpForm.get('passwords.confirmPassword')?.hasError('required')) {
+                        La Confirmation du mot de passe est requise.
+                    }
+                    @if (signUpForm.get('passwords')?.hasError('confirmPassword')) {
+                        Le mot de passe doit être le même.
+                    }
+                </p>
+                }
+        </p>
+    </fieldset>
+    <input type="submit" value="Envoyer">
+</form>
