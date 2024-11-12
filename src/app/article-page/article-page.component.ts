@@ -3,6 +3,7 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Article, ArticleComponent } from '../article/article.component';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-article-page',
@@ -15,20 +16,14 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
   currentRoute = inject(ActivatedRoute);
   articleSubscription!: Subscription;
   article: Article | null = null;
-  http = inject(HttpClient);
+  apiService = inject(ApiService);
 
   ngOnInit() {
     this.currentRoute.paramMap.subscribe((params) => {
-      this.getArticleById(params.get('id')!);
-    });
-  }
-
-  getArticleById(id: string) {
-    this.articleSubscription = this.http
-      .get<Article>(`http://localhost:3000/articles/${id}`)
-      .subscribe((article) => {
+      this.apiService.getArticleById(params.get('id')!).subscribe((article) => {
         this.article = article;
       });
+    });
   }
 
   ngOnDestroy(): void {

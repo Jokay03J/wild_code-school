@@ -1,9 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Article, ArticleComponent } from '../article/article.component';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 interface New {
   hasNews: boolean;
@@ -20,17 +21,14 @@ interface New {
 export class HomePageComponent implements OnInit {
   notification: New = { hasNews: false };
   articles$!: Observable<Article[]>;
-  http = inject(HttpClient);
+  articles: Article[] | undefined;
+  apiService = inject(ApiService);
 
   handleLike(article: Article) {
     this.notification = { hasNews: true, article };
   }
 
   ngOnInit(): void {
-    this.getArticles();
-  }
-
-  getArticles() {
-    this.articles$ = this.http.get<Article[]>('http://localhost:3000/articles');
+    this.articles$ = this.apiService.getArticles();
   }
 }

@@ -1,11 +1,9 @@
 @if(notification.hasNews) {
-    <div>Vous venez de liker {{notification.article?.title}}</div>
-}
-
-@for (article of articles$ | async; track $index) {
-    @if(article.isPublished) {
-        <a [routerLink]="'articles/' + article.id"><app-article [article]="article" (onLike)="handleLike(article)" /></a>
-    }
-} @empty {
-    <p>Aucun article</p>
+<div>Vous venez de liker {{ notification.article?.title }}</div>
+} @for (article of articles$ | async; track $index) { @if(article.isPublished) {
+<a [routerLink]="'articles/' + article.id"
+  ><app-article [article]="article" (onLike)="handleLike(article)"
+/></a>
+} } @empty {
+<p>Aucun article</p>
 }
