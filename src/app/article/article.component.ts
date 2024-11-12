@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, input, Output } from '@angular/core';
-import {FormsModule} from "@angular/forms"
+import { FormsModule } from '@angular/forms';
 
 export interface Article {
+  id: string;
   title: string;
   author: string;
   content: string;
@@ -15,13 +16,13 @@ export interface Article {
   standalone: true,
   imports: [FormsModule],
   templateUrl: './article.component.html',
-  styleUrl: './article.component.scss'
+  styleUrl: './article.component.scss',
 })
 export class ArticleComponent {
   // Version moderne(utilise les signaux)
   // article = input.required<Article>();
-  @Input({required: true}) article!: Article;
-  @Output() onLike: EventEmitter<Article> = new EventEmitter<Article>(); 
+  @Input({ required: true }) article!: Article;
+  @Output() onLike: EventEmitter<Article> = new EventEmitter<Article>();
 
   togglePublication(): void {
     this.article.isPublished = !this.article.isPublished;

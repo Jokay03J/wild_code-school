@@ -2,12 +2,10 @@
     <div>Vous venez de liker {{notification.article?.title}}</div>
 }
 
-@for (article of articles; track $index) {
+@for (article of articles$ | async; track $index) {
     @if(article.isPublished) {
-        <app-article [article]="article" (onLike)="handleLike(article)" />
+        <a [routerLink]="'articles/' + article.id"><app-article [article]="article" (onLike)="handleLike(article)" /></a>
     }
-}
-<!-- Check publishedArticle into app.component.ts -->
-@if(!publishedArticle.length) {
-    <p>Aucun article disponible</p>
+} @empty {
+    <p>Aucun article</p>
 }
