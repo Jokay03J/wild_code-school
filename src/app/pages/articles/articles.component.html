@@ -1,0 +1,10 @@
+<header>
+  <app-navbar></app-navbar>
+</header>
+<section>
+  @for (item of articles | async; track $index) {
+  <app-article [article]="item"></app-article>
+  } @empty {
+  <div>No articles available</div>
+  }
+</section>

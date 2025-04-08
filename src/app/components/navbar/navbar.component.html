@@ -1,0 +1,16 @@
+<nav>
+  <h1>Wild Blog</h1>
+  <ul>
+    <li><a mat-button [routerLink]="['/']">Home</a></li>
+    @if(authService.isLoggedIn()) {
+    <li><a mat-button [routerLink]="['/articles']">Articles</a></li>
+    <li><a mat-button [routerLink]="['/profile']">Profile</a></li>
+    @if(authService.hasRole(["ROLE_ADMIN"])) {
+    <li><a mat-button [routerLink]="['/admin']">Admin dashboard</a></li>
+    }
+    <li><a mat-button (click)="authService.logout()">Logout</a></li>
+    } @else {
+    <li><a mat-button [routerLink]="['/login']">Login</a></li>
+    }
+  </ul>
+</nav>
