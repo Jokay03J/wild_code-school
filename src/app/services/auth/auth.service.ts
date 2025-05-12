@@ -48,9 +48,8 @@ export class AuthService {
     const token = localStorage.getItem('token');
     if (!token) return null;
     try {
-      const decodedToken: any = jwtDecode(token);
-      console.log(decodedToken);
-
+      const decodedToken: { exp: number; roles: { authority: Roles }[] } =
+        jwtDecode(token);
       return decodedToken;
     } catch {
       this.logout();
@@ -62,7 +61,8 @@ export class AuthService {
     const token = localStorage.getItem('token');
     if (!token) return false;
     try {
-      const decodedToken: any = jwtDecode(token);
+      const decodedToken = this.getToken();
+      if (!decodedToken) return false;
       const expiryDate = new Date(decodedToken.exp * 1000);
       if (expiryDate < new Date()) {
         this.logout();
